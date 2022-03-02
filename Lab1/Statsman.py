@@ -1,5 +1,6 @@
 import os.path
 import re
+import Variables
 
 class Statsman():
 
@@ -19,8 +20,7 @@ class Statsman():
         tempList = []
         for element in self.list:
             tempList.append(re.sub(r'[,.?!:;"]','', element).lower())
-        wordStat = {}
-        wordStat[tempList[0]] = 1     
+        wordStat = {}  
         for i in range(len(tempList)):
             if tempList[i] in wordStat:
                 wordStat[tempList[i]] +=1
@@ -28,33 +28,50 @@ class Statsman():
                 wordStat[tempList[i]] = 1
         for key, value in wordStat.items():
            print(key, ':', str(value), sep = '')
-        
-    def GetSentenceList(self): 
-        sentenceList = []
+    
+    def GetSentList(self):  #word counter in sentences
+        self.sentenceList = []
         i = 1
-        for element in self.list:
-            if "." in element or "?" in element or "!" in element :
-                sentenceList.append(i)
-                i = 1
+        print(self.list)
+        for k in range(len(self.list)):
+            if '.' in self.list[k] or '?' in self.list[k] or '!' in self.list[k]:
+                print(self.list[k])
+                if self.list[k] in Variables.specials:
+                    i+=1
+                    continue
+                else:
+                    try:
+                        if self.list[k+1].isupper():
+                            self.sentenceList.append(i)
+                            i = 1
+                        else:
+                            i +=1
+                    except:
+                        self.sentenceList.append(i)
+                        break
             else:
                 i += 1
-        sentenceList.sort()
-        self.sentenceList = sentenceList
-    
+
     def CountMedian(self):
-        self.GetSentenceList()
+        self.GetSentList()
         length = len(self.sentenceList)
         median = 0
         average = 0
-        for element in self.sentenceList:
-            average += element
-        average /= length
-        print(average)
-        if length % 2 == 1:
-            median = self.sentenceList[int(length/2)+1] 
-        else: 
-            median = (self.sentenceList[length/2]+self.sentenceList[length/2+1])/2
-        print(median)
+        print(self.sentenceList)
+        if length > 1:
+            for element in self.sentenceList:
+                average += element
+            average /= length
+            print(average)
+            if length % 2 == 1:
+                median = self.sentenceList[int(length/2)+1] 
+            else: 
+                median = (self.sentenceList[length/2]+self.sentenceList[length/2+1])/2
+            print(median)
+        else:
+            median = average = self.sentenceList[0]
+            print("Average in sentence:",average)
+            print("Median in sentence:", median)
     
     def NGramsCounter(self):
         NGramsList = {}
@@ -95,11 +112,5 @@ class Statsman():
                break
            else:
                iter +=1
-
-man = Statsman()
-man.GetText()
-man.WordsCounter()
-man.CountMedian()
-man.NGramsCounter()
 
 
