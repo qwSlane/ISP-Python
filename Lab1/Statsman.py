@@ -32,16 +32,14 @@ class Statsman():
     def GetSentList(self):  #word counter in sentences
         self.sentenceList = []
         i = 1
-        print(self.list)
         for k in range(len(self.list)):
             if '.' in self.list[k] or '?' in self.list[k] or '!' in self.list[k]:
-                print(self.list[k])
                 if self.list[k] in Variables.specials:
                     i+=1
                     continue
                 else:
                     try:
-                        if self.list[k+1].isupper():
+                        if (self.list[k+1])[0].isupper():
                             self.sentenceList.append(i)
                             i = 1
                         else:
@@ -57,17 +55,17 @@ class Statsman():
         length = len(self.sentenceList)
         median = 0
         average = 0
-        print(self.sentenceList)
+        self.sentenceList.sort()
         if length > 1:
             for element in self.sentenceList:
                 average += element
             average /= length
-            print(average)
+            print("Average in sentence:",average)
             if length % 2 == 1:
                 median = self.sentenceList[int(length/2)+1] 
             else: 
-                median = (self.sentenceList[length/2]+self.sentenceList[length/2+1])/2
-            print(median)
+                median = (self.sentenceList[int(length/2)]+self.sentenceList[int(length/2+1)])/2
+            print("Median in sentence:", median)
         else:
             median = average = self.sentenceList[0]
             print("Average in sentence:",average)
