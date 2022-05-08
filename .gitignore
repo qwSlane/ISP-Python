@@ -1,1 +1,3 @@
 *.txt
+/Env1
+/__pycache__
