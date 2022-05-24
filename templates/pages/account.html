@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../styles/styles.css">
-    <link rel="stylesheet" href="../styles/info.css">
+    <link rel="stylesheet" href="../styles/accountinfo.css">
     <link rel="stylesheet" href="../styles/icons.css">
     <link rel="stylesheet" type="text/css" href="../js/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="../js/slick/slick-theme.css"/>
@@ -42,60 +42,49 @@
     </div>
 </header>
 <main>
-    <div class="slider">
-        <div class="slider_item">
-            <a class="topic" href="#">
-                <div class="picture" style="background-image: url('../Resources/int.jpg')">
-                    <div class="title"><span>example, ex</span></div>
+    <div class="user_info">
+        <div class="info">
+            <div class="info_icon"><span class="fa fa-user-o" aria-hidden="true"></span></div>
+            <div class="text_info">
+                <div class="user_nickname"><h3>NICKNAME</h3></div>
+                <div class="stats">
+                    <div class="user_role">
+                        <div class="user_tag">РОЛЬ</div>
+                        <h4>ПОЛЬЗОВАТЕЛЬ</h4>
+                    </div>
+                    <div class="rating">
+                        <div class="user_tag">РЕЙТИНГ</div>
+                        <h4> 8.1</h4>
+                    </div>
+                    <div class="registration_date">
+                        <div class="user_tag">ДАТА РЕГИСТРАЦИИ</div>
+                        <h4>24.05.2022</h4></div>
                 </div>
-            </a>
-        </div>
-        <div class="slider_item">
-            <a class="topic" href="#">
-                <div class="picture" style="background-image: url('../Resources/int.jpg')">
-                    <div class="title"><span>example, ex</span></div>
-                </div>
-            </a>
-        </div>
-        <div class="slider_item">
-            <a class="topic" href="#">
-                <div class="picture" style="background-image: url('../Resources/int.jpg')">
-                    <div class="title"><span>example, ex</span></div>
-                </div>
-            </a>
-        </div>
-        <div class="slider_item">
-            <a class="topic" href="#">
-                <div class="picture" style="background-image: url('../Resources/int.jpg')">
-                    <div class="title"><span>example, ex</span></div>
-                </div>
-            </a>
-        </div>
-
-        <div class="slider_item">
-            <div class="picture" style="background-image: url('../Resources/int.jpg')"></div>
-            <div class="title">авашот</div>
-        </div>
-        <div class="slider_item">
-            <div class="picture" style="background-image: url('../Resources/int.jpg')"></div>
-            <div class="title">авашот</div>
-        </div>
-    </div>
-    <div class="information">
-        <div class="info_title"><h1> ОБ ИЗДАТЕЛЬСТВЕ</h1></div>
-        <div class="description">
-            <div class="center_content">
-                <p>
-                    «Спутник» — регулярное издательство, основанное в 2022 году. Ресурс публикует преимущественно
-                    публицистику и художественную литературу. В публицистике преобладает эссеистика, true story,
-                    психоанализ и философия. </p>
-                <p><strong>Главный редактор:</strong> ФИФТИСЭНТ
-                    <br>
-                    <strong>По общим вопросам: </strong><a href="https://t.me/deqq0">deqq0</a>
-                </p>
             </div>
         </div>
     </div>
+    <div class="table">
+        <div class="info_title"><h1> ИСТОРИЯ ОЦЕНОК</h1></div>
+        <div class="board">
+            <div class="board_head">
+                <div class="column num">№</div>
+                <div class="column name">статья</div>
+                <div class="column date_time">дата и время</div>
+                <div class="space"></div>
+                <div class="column vote">оценка</div>
+            </div>
+            <div class="board_item">
+                <div class="column num">1</div>
+                <div class="column name"><a href="#">Искусство быть</a></div>
+                <div class="column date_time">12.05.2022</div>
+                 <div class="space"></div>
+                <div class="column vote">7</div>
+            </div>
+        </div>
+
+    </div>
+
+
 </main>
 <div id="popup" class="popup">
     <div class="popup_body">

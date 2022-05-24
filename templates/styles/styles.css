@@ -6,7 +6,6 @@
 
 }
 .stick img{
-
     max-width: 100%;
     filter: brightness(60%);
 }
@@ -14,17 +13,14 @@
 a, a:visited{
     text-decoration: none;
 }
-body{
-    position: absolute;
-    width: 100%;
 
+form {
+    display: block;
+    margin-top: 0;
 }
 .background{
-    user-select: none;
-    position: sticky;
-    max-height: 60%;
 
-    top: -750px;
+
 }
 
 /* -------HEADER------- */
@@ -44,6 +40,10 @@ header{
 .logo img{
     width: 25px;
     transition: all 0.3s ease-in-out;
+}
+
+.fixed{
+    position: fixed;
 }
 
 .logo img:hover{
@@ -215,10 +215,15 @@ main{
     color: #FFFFFF;
 }
 
- span{
+.title span,
+.page_title span{
     text-transform: uppercase;
     background-color: rgba(0, 0, 0, 0.5);
 	box-shadow: -2px 0 0 rgba(0, 0, 0, 0.5), 2px 0 0 rgba(0, 0, 0, 0.5);
+}
+.page_title span{
+    user-select: none;
+    font-size: xx-large;
 }
 
 .picture{
@@ -256,7 +261,7 @@ main{
     margin-left: 1em;
 }
 
-.page_title span{
+.icon span{
     color: #FFFFFF;
     font-size: xx-large;
     line-height: 1.05em;
@@ -288,7 +293,7 @@ main{
 
 
 /*CONTENT_SEARCH*/
-form{
+.search-bar form{
     width: 100%;
     display: flex;
     border-bottom: 2px solid transparent;
@@ -323,8 +328,10 @@ input, button {
 
 /*FOOTER*/
 footer{
-    position: absolute;
+    position: relative;
     bottom: 0;
+    right: 0;
+    margin-top: 5em;
     display: flex;
     width: 100vw;
     max-width :100%;
@@ -348,5 +355,185 @@ footer{
    font-size: xx-large;
    color: #960018;
    transition: all 0.3s linear;
+}
+
+
+/*POPUP*/
+.popup{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.8s ease 0s;
+}
+.popup:target{
+    opacity: 1;
+    visibility: visible;
+}
+.popup:target .container{
+    opacity: 1;
+    transform: translate(0px, 0px);
+}
+.popup_area{
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.popup_body{
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    max-width: 960px;
+    z-index: 15;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    transition: all 0.8s ease 0s;
+    transform-style: preserve-3d;
+    opacity: 0;
+    transform: translate(0px, 100%);
+}
+.icon{
+    width: 80px;
+    align-items: center !important;
+    justify-content: center !important;
+    display: flex;
+    height: 80px;
+    background: #ccccff;
+    border-radius: 50%;
+    font-size: 30px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+.icon span{
+    color: black;
+}
+.popup_title{
+    display: flex;
+    font-weight: 700;
+    font-size: 20px;
+    color: #ccccff;
+    justify-content: center;
+    padding-bottom: 2em;
+}
+
+.popup_content{
+    margin-right: -15px;
+    margin-left: -15px;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.9);
+    min-width: 370px;
+    min-height: 400px;
+    max-width: 40%;
+    perspective: 1000px;
 
 }
+
+.loin_form{
+    display: block;
+}
+
+.form_group{
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form_control {
+    height: 48px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
+    font-size: 16px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid transparent;
+    padding-left: 20px;
+    padding-right: 20px;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.submit {
+    position: absolute;
+    cursor: pointer;
+    top: 20px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.submit_reg{
+    position: absolute;
+    cursor: pointer;
+    top: 55px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.btn{
+    background: #ccccff !important;
+    color: #000 !important;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    height: 3em;
+    width: 100%;
+    user-select: none;
+}
+.reg-1{
+
+}
+
+.reg{
+    text-decoration: none;
+    user-select: none;
+    cursor: pointer;
+    color: #ccccff;
+    font-size: 16px;
+    font-weight: 400;
+    max-width: 40%;
+    margin-bottom: 1em;
+}
+
+
+.front,
+.back{
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    padding: 1rem 3rem 3rem 3rem !important;
+    transition: 1s;
+    backface-visibility: hidden;
+}
+
+ .back {
+    transform: rotateY(180deg);
+}
+
+
+#front_.transform {
+    transform: rotateY(180deg);
+}
+#back_.transform{
+    transform: rotateY(360deg);
+ }
+

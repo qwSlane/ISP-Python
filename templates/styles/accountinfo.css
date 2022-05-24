@@ -1,0 +1,121 @@
+
+
+.user_info{
+    margin: auto;
+    margin-top: 5em;
+    background-color: black;
+    opacity: 0.7;
+    width: 50%;
+    display: block;
+    border: 5px #000000 solid;
+}
+
+.info{
+    padding: 1em;
+    display: flex;
+    width: 100%;
+}
+
+.info_icon span{
+    font-family: FontAwesome;
+    width: 150px;
+    align-items: center !important;
+    justify-content: center !important;
+    display: flex;
+    height: 150px;
+
+    color: #ccccff;
+    font-size: 50px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+.text_info{
+    display: block;
+    width: 100%;
+    margin-left: 1em;
+    align-self: center;
+    justify-content: center;
+    color: #FFFFFF;
+
+}
+.stats{
+    display: flex;
+    justify-content: space-between;
+}
+.user_role{
+    display: block;
+}
+.user_nickname{
+     font-size: 40px;
+    padding: 1em 1em 0.5em 1em;
+}
+
+.user_tag{
+    margin-bottom: 0.5em;
+}
+
+.table{
+    position: relative;
+    margin: auto;
+    display: block;
+}
+.info_title{
+    text-align: center;
+    width: 100%;
+    color: #ccccff;
+    margin-top: 3em;
+    margin-bottom: 2em;
+}
+.board_head{
+    font-size: 20px;
+    width: 100%;
+    display: flex;
+
+}
+.board{
+    color: #FFFFFF;
+    padding: 1em;
+    background-color: black;
+    opacity: 0.7;
+    margin: auto;
+    display: block;
+    max-width: 50%;
+}
+.num{
+    min-width: 10%;
+}
+.date_time{
+    min-width: 22%;
+    display: flex;
+    justify-content: center;
+}
+.space{
+    min-width: 4%;
+}
+.vote{
+    min-width: 8%;
+    display: flex;
+    justify-content: flex-end;
+}
+.column{
+     padding: 0.5em;
+     margin-left: 0.5em;
+}
+.name{
+    min-width: 45%;
+}
+.name a{
+    text-decoration: none;
+    color: #FFFFFF;
+    transition: all 0.6s linear;
+}
+.name a:hover{
+    text-decoration: none;
+    color: #ccccff;
+}
+
+.board_item{
+    width: 100%;
+    font-size: 18px;
+    display: flex;
+}
