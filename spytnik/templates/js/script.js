@@ -30,28 +30,11 @@ const height = document.documentElement.scrollTop
 
 
 	$(document).ready(function() {
-
 		var element = $(".background");
-		var height_el = element.height();
-        console.log(height_el);
-		$(".fixed_block_position").css({
-			"width": element.outerWidth(),
-			"height": element.outerHeight()
-		});
-
-		$(window).scroll(function() {
-
-			if($(window).scrollTop() > height_el) {
-
-				element.addClass("fixed");
-
-			} else {
-
-				element.removeClass("fixed");
-
-			}
-
-		});
-
+		let height_el = element.height();
+        let dx = 0-Math.floor(height_el*0.9)
+         console.log(dx);
+		$('#mn').css('margin-top',dx+'px')
 	});
+
 

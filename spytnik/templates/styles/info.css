@@ -2,8 +2,7 @@
 
 .information{
     display: block;
-    justify-content: center;
-    align-self: center;
+    position: relative;
     width: 70%;
     margin: auto;
     margin-top: 3em;

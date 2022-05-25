@@ -14,12 +14,18 @@ a, a:visited{
     text-decoration: none;
 }
 
+
 form {
     display: block;
     margin-top: 0;
 }
-.background{
 
+.stick{
+
+}
+.background{
+    position: sticky;
+    top: 0;
 
 }
 
@@ -161,10 +167,8 @@ header{
 
 /*MAIN*/
 main{
-    position: absolute;
-    top: 5em;
-    width: 100%;
 
+    width: 100%;
     display: block;
 }
 

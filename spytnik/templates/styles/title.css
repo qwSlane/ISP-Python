@@ -13,6 +13,10 @@
     color: #FFFFFF;
 
 }
+.title_author{
+    margin-left: 1em;
+}
+
 .title_author a{
     text-decoration: none;
 }
