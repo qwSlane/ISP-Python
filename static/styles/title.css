@@ -1,0 +1,25 @@
+
+
+.info_img{
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.title_description{
+    justify-content: space-between;
+    font-size: 20px;
+    display: flex;
+    margin-bottom: 1em;
+    color: #FFFFFF;
+
+}
+.title_author{
+    margin-left: 1em;
+}
+
+.title_author a{
+    text-decoration: none;
+}
+.title_tag{
+    margin-right: 2em;
+}
