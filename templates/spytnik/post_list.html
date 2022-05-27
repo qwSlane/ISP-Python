@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 
+{% block references %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/info.css' %}">
+{% endblock references %}
 {% block content %}
     <div class="slider">
         <div class="slider_item">
@@ -41,6 +45,9 @@
         </div>
     </div>
     <div class="wrapper">
+        <div class="info_title">
+            <h1>Категория:{{ tag|capfirst  }} </h1>
+        </div>
         {% for post in post_list %}
             <div class="content_wrapper">
                 <div class="page">
@@ -49,7 +56,7 @@
                         <div class="author"><a class="author_ref" href="#">{{ post.author }}</a></div>
                         <div class="tag">
                             {% for tag in post.genre.all %}
-                            <a class="tag_ref" href="#">#{{ tag.name }}</a></div>
+                                <a class="tag_ref" href="#"> #{{ tag.name }}</a></div>
                             {% endfor %}
                         <div class="date">{{ post.published_date }}</div>
                     </div>

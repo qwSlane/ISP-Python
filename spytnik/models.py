@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -18,15 +19,19 @@ class Post(models.Model):
     genre = models.ManyToManyField(Genre)
     title = models.CharField(max_length=200)
     text = models.TextField()
-    av_score = models.FloatField()
+    slug = models.SlugField(max_length=25, default='')
     published_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse("title", kwargs={"slug": self.genre.first().slug, "title_slug": self.slug})
+
 
 class PostDescription(models.Model):
     image = models.ImageField(upload_to='articles/', null=True)
+    text = models.TextField(null=True)
     author = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True)
 
 

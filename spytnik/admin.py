@@ -10,7 +10,7 @@ class PostDescriptionInline(admin.StackedInline):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ["title", "author", "av_score", "published_date"]
+    list_display = ["title", "author", "published_date"]
     inlines = [PostDescriptionInline]
 
 
