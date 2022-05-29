@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, Genre, PostDescription
+from .models import Post, Genre, PostDescription, Pleb, Vote
 
 
 class PostDescriptionInline(admin.StackedInline):
@@ -16,4 +16,6 @@ class PostAdmin(admin.ModelAdmin):
 
 admin.site.register(PostDescription)
 admin.site.register(Genre)
+admin.site.register(Pleb)
+admin.site.register(Vote)
 

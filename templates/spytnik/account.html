@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main>
+        <div class="user_info">
+            <div class="info">
+                <div class="info_icon">
+                    {% if user.is_authenticated %}
+                        <form class="" method="POST" action="{% url 'profile' user.username %}">
+                            {% csrf_token %}
+                            <button type="submit" name="submit" value="logout" class="btn">Выход</button>
+                        </form>
+                    {% endif %}
+                    <span class="fa fa-user-o" aria-hidden="true"></span></div>
+                <div class="text_info">
+                    <div class="user_nickname"><h3>{{ user.username }}</h3></div>
+                    <div class="stats">
+                        <div class="user_role">
+                            <div class="user_tag">РОЛЬ</div>
+                            <h4>ПОЛЬЗОВАТЕЛЬ</h4>
+                        </div>
+                        <div class="rating">
+                            <div class="user_tag">РЕЙТИНГ</div>
+                            <h4>{{ average }}</h4>
+                        </div>
+                        <div class="registration_date">
+                            <div class="user_tag">ДАТА РЕГИСТРАЦИИ</div>
+                            <h4>{{ user.date_joined }}</h4></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table">
+            <div class="info_title"><h1> ИСТОРИЯ ОЦЕНОК</h1></div>
+
+            <div class="board">
+                <div class="board_head">
+                    <div class="column num">№</div>
+                    <div class="column name">статья</div>
+                    <div class="column date_time">дата и время</div>
+                    <div class="space"></div>
+                    <div class="column vote">оценка</div>
+                </div>
+                 {% for vote in vote_list %}
+                <div class="board_item">
+                    <div class="column num">1</div>
+                    <div class="column name"><a href="{{ vote.post.get_absolute_url }}">{{ vote.post.title }}</a></div>
+                    <div class="date_time">{{ vote.voted_date }}</div>
+                    <div class="space"></div>
+                    <div class="vote">{{ vote.value }}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock content %}

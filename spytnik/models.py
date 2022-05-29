@@ -1,8 +1,6 @@
-from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-from django.utils import timezone
 
 
 class Genre(models.Model):
@@ -11,6 +9,10 @@ class Genre(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Pleb(models.Model):
+    user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
 
 
 class Post(models.Model):
@@ -32,11 +34,17 @@ class Post(models.Model):
 class PostDescription(models.Model):
     image = models.ImageField(upload_to='articles/', null=True)
     text = models.TextField(null=True)
-    author = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True)
+    belong = models.ForeignKey(Post, related_name="description", on_delete=models.SET_NULL, null=True)
 
 
 class Vote(models.Model):
     value = models.SmallIntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    book = models.ForeignKey(Post, on_delete=models.CASCADE)
-    voted_on = models.DateTimeField(auto_now=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    voted_date = models.DateTimeField(auto_now_add=True)
+
+
+class News(models.Model):
+    title = models.CharField(max_length=100)
+    text = models.TextField()
+    published_date = models.DateTimeField(auto_now_add=True)

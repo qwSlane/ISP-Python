@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
-{% load static %}
 
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/info.css' %}">
 {% block content %}
+<main id="mn">
     <div class="slider">
         <div class="slider_item">
             <a class="topic" href="#">
@@ -41,27 +43,20 @@
             <div class="title">авашот</div>
         </div>
     </div>
-    <div class="wrapper">
-        <div class="ititle">
-            <h1>Категория:{{ tag }} </h1>
+    <div class="information">
+        <div class="info_title"><h1> ОБ ИЗДАТЕЛЬСТВЕ</h1></div>
+        <div class="description">
+            <div class="center_content">
+                <p>
+                    «Спутник» — регулярное издательство, основанное в 2022 году. Ресурс публикует преимущественно
+                    публицистику и художественную литературу. В публицистике преобладает эссеистика, true story,
+                    психоанализ и философия. </p>
+                <p><strong>Главный редактор:</strong> ФИФТИСЭНТ
+                    <br>
+                    <strong>По общим вопросам: </strong><a href="https://t.me/deqq0">deqq0</a>
+                </p>
+            </div>
         </div>
-            {% for post in post_list %}
-                {% if post_list.count > 0  %}
-                <div class="content_wrapper">
-                    <div class="page">
-                        <div class="page_title"><span>{{ post.title }}</span></div>
-                        <div class="page_info">
-                            <div class="author"><a class="author_ref" href="#">{{ post.author }}</a></div>
-                            <div class="tag">
-                                {% for tag in post.genre.all %}
-                                    <a class="tag_ref" href="{% url tag.slug %} "> #{{ tag.name }}</a></div>
-                                {% endfor %}
-                            <div class="date">{{ post.published_date }}</div>
-                        </div>
-                        <a class="cover" href="{{ post.get.url }}"><img src="{{ post.image.url }}"></a>
-                    </div>
-                </div>
-                 {% endif %}
-            {% endfor %}
     </div>
+</main>
 {% endblock content %}

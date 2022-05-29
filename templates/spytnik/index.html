@@ -1,44 +1,18 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
     <div class="slider">
+
         <div class="slider_item">
             <a class="topic" href="#">
-                <div class="picture" style="background-image: url('../Resources/int.jpg')">
-                    <div class="title"><span>example, ex</span></div>
-                </div>
-            </a>
-        </div>
-        <div class="slider_item">
-            <a class="topic" href="#">
-                <div class="picture" style="background-image: url('../Resources/int.jpg')">
-                    <div class="title"><span>example, ex</span></div>
-                </div>
-            </a>
-        </div>
-        <div class="slider_item">
-            <a class="topic" href="#">
-                <div class="picture" style="background-image: url('../Resources/int.jpg')">
-                    <div class="title"><span>example, ex</span></div>
-                </div>
-            </a>
-        </div>
-        <div class="slider_item">
-            <a class="topic" href="#">
-                <div class="picture" style="background-image: url('../Resources/int.jpg')">
+                <div class="picture" style="background-image: url('{% static "Resources/int.jpg" %}')">
                     <div class="title"><span>example, ex</span></div>
                 </div>
             </a>
         </div>
 
-        <div class="slider_item">
-            <div class="picture" style="background-image: url('../Resources/int.jpg')"></div>
-            <div class="title">авашот</div>
-        </div>
-        <div class="slider_item">
-            <div class="picture" style="background-image: url('../Resources/int.jpg')"></div>
-            <div class="title">авашот</div>
-        </div>
     </div>
     <div class="wrapper">
         {% for post in post_list %}
@@ -49,7 +23,7 @@
                         <div class="author"><a class="author_ref" href="#">{{ post.author }}</a></div>
                         <div class="tag">
                             {% for tag in post.genre.all %}
-                            <a class="tag_ref" href="#">#{{ tag.name }}</a></div>
+                            <a class="tag_ref" href="">#{{ tag.name }}</a></div>
                             {% endfor %}
                         <div class="date">{{ post.published_date }}</div>
                     </div>

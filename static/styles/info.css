@@ -8,9 +8,11 @@
     margin-top: 3em;
     padding: 1em 1em 0 1em;
 }
-.wrapper .info_title{
-    padding-top: 1em;
-    padding-right: 1em;
+.ititle {
+    position: absolute;
+    margin-left: 2em;
+    margin-bottom: 1em;
+    color: #ccccff;
 }
 .info_title{
     width: 100%;
@@ -39,4 +41,8 @@ p {
 a{
     text-decoration: underline black 2px;
     color: white;
+}
+
+.marg{
+
 }

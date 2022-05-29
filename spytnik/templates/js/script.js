@@ -16,18 +16,8 @@ $(function(){
   });
 });
 
-const screenHeight = window.screen.height
+
 const height = document.documentElement.scrollTop
-
-// $(window).scroll(function(){
-//         if (height >= screenHeight) {
-//             $('.background').style.overflow = 'hidden';
-//         }
-//         else {
-//             $('.background').removeClass('fixed');
-//         }
-//     });
-
 
 	$(document).ready(function() {
 		var element = $(".background");
@@ -36,5 +26,4 @@ const height = document.documentElement.scrollTop
          console.log(dx);
 		$('#mn').css('margin-top',dx+'px')
 	});
-
 

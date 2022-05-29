@@ -9,7 +9,17 @@
     display: block;
     border: 5px #000000 solid;
 }
+.out{
+    position: absolute;
+    background-color: #ccccff;
+    max-width: 150px;
+    margin-right: 1em;
+    transition: all 0.8s linear;
+}
+.out:hover{
+    background-color: #960018;
 
+}
 .info{
     padding: 1em;
     display: flex;
@@ -85,7 +95,9 @@
     min-width: 10%;
 }
 .date_time{
+    padding: 0.5em;
     min-width: 22%;
+    margin-right: 0.5em;
     display: flex;
     justify-content: center;
 }
@@ -93,16 +105,17 @@
     min-width: 4%;
 }
 .vote{
+    padding: 0.5em;
     min-width: 8%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 .column{
      padding: 0.5em;
      margin-left: 0.5em;
 }
 .name{
-    min-width: 45%;
+    width: 45%;
 }
 .name a{
     text-decoration: none;

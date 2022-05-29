@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 {% load static %}
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'styles/accstyles.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static ' styles/icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/info.css' %}">
+
     {% block references %}
     {% endblock references %}
-    <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/slick.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick-theme.css' %}"/>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +24,7 @@
 
 <body>
 <div class="background">
-    <div class="stick"><img src="../spytnik/templates/Resources/sur.jpg"></div>
+    <div class="stick"><img src="{% static 'Resources/sur.jpg' %}"></div>
 </div>
 <header>
     <div class="header-container">
@@ -29,26 +33,61 @@
                 <span class="arrow"></span></a>
                 <div class="sub_menu">
                     <ul class="submenu">
-                        <li class="sub_item"><a class="item" href="#">оффтоп</a></li>
-                        <li class="sub_item"><a class="item" href="#">лучшее</a></li>
-                        <li class="sub_item"><a class="item" href="#">музыка</a></li>
-                        <li class="sub_item"><a class="item" href="#">жизнб</a></li>
+                        <li class="sub_item"><a class="item" href="{% url 'other' %}">оффтоп</a></li>
+                        <li class="sub_item"><a class="item" href="{% url 'music' %}">музыка</a></li>
+                        <li class="sub_item"><a class="item" href="{% url 'movies' %}">кино</a></li>
+                        <li class="sub_item"><a class="item" href="{% url 'life' %}">жизнб</a></li>
                     </ul>
                 </div>
             </li>
-            <li class="menu-header_item logo_item"><a class="logo icon-satellite" href="../spytnik/templates/pages/index.html"></a></li>
-            <li class="menu-header_item"><a class="item" href="../spytnik/templates/pages/info.html">Издательство</a></li>
+            <li class="menu-header_item logo_item"><a class="logo icon-satellite" href="{% url 'home' %}"></a></li>
+            <li class="menu-header_item"><a class="item" href="{% url 'info' %}">Издательство</a>
+            </li>
         </ul>
     </div>
     <div class="nav">
-        <a class="account_logo" href="#popup"><i class="fa fa-user-circle" aria-hidden="true"></i></a>
+
+        <a class="account_logo" {% if user.is_authenticated %}
+           href="{% url 'profile' user.username %}"><i class="fa fa-user-circle" aria-hidden="true"></i></a>
+        {% else %}
+            onclick="func()"><i class="fa fa-user-circle" aria-hidden="true"></i></a>
+        {% endif %}
+
+
+        <script>function func() {
+            let el = document.getElementById('popup');
+            el.classList.add('open');
+            el.addEventListener("click", function (e) {
+                if (!e.target.closest('.popup_content')) {
+                    popupClose(e.target.closest('.popup'));
+                }
+            });
+        }
+
+        function popupClose(curr) {
+            curr.classList.remove('open');
+        }
+
+        $(document).ready(function () {
+            var element = $(".main");
+            let height_el = element.height();
+            let back = $(".background").height();
+            let dx;
+            if (height_el < back) {
+                dx = back - height_el;
+            }
+            console.log(dx);
+            $('#foot').css('margin-top', dx + 'px')
+        });
+        </script>
     </div>
 </header>
 
 <main id="mn">
- {% block content %}
- {% endblock content %}
-    <footer>
+    {{ form }}
+    {% block content %}
+    {% endblock content %}
+    <footer id="foot">
         <div class="page_end">
             <p>© 2022 Спутник</p>
         </div>
@@ -60,38 +99,63 @@
 
 <div id="popup" class="popup">
     <div class="popup_body">
-        <a href="#head" class="popup_area"></a>
-        <div class="container">
+        <div id="cont" class="container">
             <div class="popup_content">
                 <div class="front" id="front_">
-                    <div class="popup_title">ВХОД</div>
+                    <div class="popup_title">ВХОД
+                    </div>
                     <div class="icon"><span class="fa fa-user-o" aria-hidden="true"></span></div>
-                    <form class="login_form">
-                        <div class="form_group"><input type="text" class="form_control" placeholder="Имя пользователя"
+                    <form class="login_form" method="POST" action="{% url 'home' %}">
+                        {% csrf_token %}
+                        <div class="form_group"><input name="username" type="text" class="form_control"
+                                                       placeholder="Имя пользователя"
                                                        required/></div>
-                        <div class="form_group"><input type="text" class="form_control" placeholder="Пароль" required>
+                        <div class="form_group"><input name="password" type="text" class="form_control"
+                                                       placeholder="Пароль" required>
                         </div>
                         <div class="form_group">
                             <div class="reg reg-1" id="elem">Регистрация</div>
                         </div>
+                        <div class="message">
+                            {% if messages %}
+                                {% for massage in massages %}
+                                    {{ message }}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                         <div class="form_group">
-                            <button class="btn submit">Войти</button>
+                            <button type="submit" name='submit' value="sign_in" class="btn">Войти</button>
                         </div>
                     </form>
                 </div>
                 <div class="back" id="back_">
                     <div class="popup_title">РЕГИСТРАЦИЯ</div>
                     <div class="icon"><span class="fa fa-user-o" aria-hidden="true"></span></div>
-                    <form class="login_form">
-                        <div class="form_group"><input type="text" class="form_control" placeholder="Имя пользователя"
+                    <form class="login_form" method="POST" action="{% url 'home' %}">
+                        {% csrf_token %}
+                        <div class="form_group"><input type="text" name="reg_username" class="form_control"
+                                                       placeholder="Имя пользователя"
                                                        required/></div>
-                        <div class="form_group"><input type="text" class="form_control" placeholder="Пароль" required>
+                        <div class="form_group"><input type="text" name="reg_pass1" class="form_control"
+                                                       placeholder="Пароль" required>
+                        </div>
+                        <div class="form_group"><input type="text" class="form_control" name="reg_pass2"
+                                                       placeholder="Повторите пароль" required>
                         </div>
                         <div class="form_group">
                             <div class="reg" id="elem-1">Вход</div>
                         </div>
+                        <div class="message">
+                            {% if messages %}
+                                {% for massage in massages %}
+                                    {{ message }}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                         <div class="form_group">
-                            <button class="btn submit">Регистрация</button>
+                            <button type="submit" name='submit' class="btn" value="reg" style="margin-top: -1.5em">
+                                Регистрация
+                            </button>
                         </div>
                     </form>
                 </div>

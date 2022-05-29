@@ -373,11 +373,11 @@ footer{
     visibility: hidden;
     transition: all 0.8s ease 0s;
 }
-.popup:target{
+.popup.open{
     opacity: 1;
     visibility: visible;
 }
-.popup:target .container{
+.popup.open .container{
     opacity: 1;
     transform: translate(0px, 0px);
 }
