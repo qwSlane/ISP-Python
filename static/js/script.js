@@ -6,6 +6,7 @@ $(function () {
     $('#elem').on('click', function () {
         $('#front_').toggleClass('transform');
         $('#back_').toggleClass('transform');
+        clearInput();
     });
 });
 
@@ -13,6 +14,7 @@ $(function () {
     $('#elem-1').on('click', function () {
         $('#front_').toggleClass('transform');
         $('#back_').toggleClass('transform');
+        clearInput();
     });
 });
 
@@ -39,3 +41,13 @@ $(document).ready(function () {
     $('#foot').css('margin-top', dx + 'px')
 });
 
+function clearInput(){
+    $('input[name = username]').val('').change();
+    $('input[name = password]').val('').change();
+
+    $('input[name = reg_username]').val('').change();
+    $('input[name = reg_pass1]').val('').change();
+    $('input[name = reg_pass2]').val('').change();
+
+
+}

@@ -209,11 +209,13 @@ main{
 
 .title{
     z-index: 4;
-    position: relative;
-    top: 80px;
+    position: absolute;
+    display: flex;
+    align-self: center;
+    width: 80%;
+    bottom: 5px;
     left: 15px;
-    display: inline;
-    font-size: large;
+    font-size: 12px;
     line-height: 12px;
     color: #FFFFFF;
 }
@@ -230,6 +232,7 @@ main{
 }
 
 .picture{
+    position: relative;
     width: 160px;
     height: 160px;
     background-repeat: no-repeat;
@@ -426,6 +429,7 @@ footer{
 }
 .popup_title{
     display: flex;
+    margin-bottom: 1em;
     font-weight: 700;
     font-size: 20px;
 
@@ -437,7 +441,7 @@ footer{
     margin-bottom: 1em;
     color: #960018;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 14px;
 
 }
 .popup_content{
@@ -497,6 +501,7 @@ footer{
 
 .btn{
     background: #ccccff !important;
+    cursor: pointer;
     color: #000 !important;
     display: inline-block;
     font-size: 16px;
@@ -538,6 +543,9 @@ footer{
  .back {
     transform: rotateY(180deg);
 }
+ .form_back{
+     height: 3em;
+ }
 
 
 #front_.transform {

@@ -19,6 +19,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     image = models.ImageField(upload_to='articles/', null=True)
     genre = models.ManyToManyField(Genre)
+    isChosen = models.BooleanField(default=False,null=True)
     title = models.CharField(max_length=200)
     text = models.TextField()
     slug = models.SlugField(max_length=25, default='')
@@ -36,6 +37,9 @@ class PostDescription(models.Model):
     text = models.TextField(null=True)
     belong = models.ForeignKey(Post, related_name="description", on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return self.text
+
 
 class Vote(models.Model):
     value = models.SmallIntegerField()
@@ -44,7 +48,3 @@ class Vote(models.Model):
     voted_date = models.DateTimeField(auto_now_add=True)
 
 
-class News(models.Model):
-    title = models.CharField(max_length=100)
-    text = models.TextField()
-    published_date = models.DateTimeField(auto_now_add=True)

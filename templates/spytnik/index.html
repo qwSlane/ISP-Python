@@ -4,15 +4,17 @@
 
 {% block content %}
     <div class="slider">
-
-        <div class="slider_item">
-            <a class="topic" href="#">
-                <div class="picture" style="background-image: url('{% static "Resources/int.jpg" %}')">
-                    <div class="title"><span>example, ex</span></div>
-                </div>
-            </a>
-        </div>
-
+        {% for post in post_list %}
+            {% if post.isChosen %}
+            <div class="slider_item">
+                <a class="topic" href="{{ post.get_absolute_url }}">
+                    <div class="picture" style="background-image: url('{{ post.image.url }}')">
+                        <div class="title"><span>{{ post.title }}</span></div>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+        {% endfor %}
     </div>
     <div class="wrapper">
         {% for post in post_list %}
@@ -23,7 +25,7 @@
                         <div class="author"><a class="author_ref" href="#">{{ post.author }}</a></div>
                         <div class="tag">
                             {% for tag in post.genre.all %}
-                            <a class="tag_ref" href="">#{{ tag.name }}</a></div>
+                                <a class="tag_ref" href="">#{{ tag.name }}</a></div>
                             {% endfor %}
                         <div class="date">{{ post.published_date }}</div>
                     </div>

@@ -132,3 +132,9 @@
     font-size: 18px;
     display: flex;
 }
+
+
+.rating h4{
+     display: flex;
+    justify-content: center;
+}

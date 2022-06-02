@@ -1,13 +1,13 @@
 import json
 from datetime import datetime
+from pprint import pprint
 
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView
+from django.views import View
+from django.views.generic import ListView, DetailView, TemplateView
 from spytnik.models import Post
 from django.contrib.auth.models import User
-from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate, login, logout
 from . models import Pleb, Vote, Genre
 
@@ -16,7 +16,8 @@ class PostListView(ListView):
     model = Post
 
     def get_queryset(self):
-        return Post.objects.filter(genre__slug=self.kwargs.get("slug")).select_related()
+        return Post.objects.filter(genre__slug=self.kwargs.get("slug"))
+
 
     def get_context_data(self, **kwargs):
         context = super(PostListView, self).get_context_data(**kwargs)
@@ -28,7 +29,7 @@ class PostListView(ListView):
         for tag in tags:
             if tag.slug == slug:
                 context['tag'] = tag.name
-
+                t = tag
         return context
 
 
@@ -36,7 +37,7 @@ class InfoView(ListView):
     template_name = 'spytnik/info.html'
 
     def get_queryset(self):
-        return Post.objects.filter(genre__slug=self.kwargs.get("slug")).select_related()
+        return Post.objects.filter(isChosen=True).select_related()
 
 
 class ProfileView(ListView):
@@ -55,7 +56,10 @@ class ProfileView(ListView):
         sum = 0
         for vot in votes:
             sum += vot.value
-        context['average'] = sum/count
+        if count > 0:
+            context['average'] = sum/count
+        else:
+            context['average'] = "--"
         return context
 
     def post(self, request, *args, **kwargs):
@@ -71,6 +75,19 @@ class TitleView(DetailView):
     slug_url_kwarg = 'title_slug'
     context_object_name = "post"
     template_name = "spytnik/title.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(DetailView, self).get_context_data(**kwargs)
+        item = kwargs.get('object')
+        votes = Vote.objects.filter(post__slug=item.slug).select_related()
+        if votes.count() > 0:
+            sum = 0
+            for vot in votes:
+                sum += vot.value
+            context['average'] = sum/votes.count()
+        else:
+            context['average'] = '--'
+        return context
 
     def post(self, request, *args, **kwargs):
         value = 0
@@ -106,28 +123,28 @@ class HomeView(ListView):
     paginate_by = 12
     template_name = "spytnik/index.html"
 
-    def post(self, request, *args, **kwargs):
-        if request.POST.get('submit') == 'sign_in':
-
+    def post(self, request):
+        print(request.POST)
+        if request.POST.get("reg_username") is None:
             name = request.POST.get("username")
             password = request.POST.get("password")
             user = authenticate(request, username=name, password=password)
-            if user is not None:
+            if user:
                 login(request, user)
-                return redirect('user/'+name)
-            else:
-                return redirect('')
+                return JsonResponse(data={'url': 'user/' + name}, status=201)
+            return JsonResponse(data={'error': "Неверное емя пользователя или пароль"}, status=400)
         else:
             name = request.POST.get("reg_username")
             pass1 = request.POST.get("reg_pass1")
-            pass2 = request.POST.get("reg_pass2")
-            if pass1 == pass2:
-                user = User.objects.create_user(name, password=pass1)
+            user = User.objects.create_user(username=name, password=pass1)
+            print(user)
+            if user:
                 user.save()
                 plebs = Pleb(user=user)
                 plebs.save()
-                return redirect('/' + name)
-
+                login(request, user)
+                return JsonResponse(data={'url': 'user/' + name}, status=201)
+            return JsonResponse(data={'error': "Данное имя пользователя уже используется"}, status=400)
 
 
 

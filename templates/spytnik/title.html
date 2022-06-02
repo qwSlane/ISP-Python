@@ -19,6 +19,34 @@
 
             </div>
             <img src="{{ post.image.url }}" class="info_img"/>
+            {% if user.is_authenticated %}
+                <div class="stars">
+                    <form class="star_form" method="POST" action="{% url 'title' post.genre.first.slug post.slug %}">
+                        {% csrf_token %}
+                        <div class="star">
+                            <button type="submit" name="submit" value="s_5" class=><i class="fa fa-star fa-4x"></i>
+                            </button>
+                        </div>
+                        <div class="star">
+                            <button type="submit" name="submit" value="s_4" class=><i class="fa fa-star fa-4x"></i>
+                            </button>
+                        </div>
+                        <div class="star">
+                            <button type="submit" name="submit" value="s_3" class=><i class="fa fa-star fa-4x"></i>
+                            </button>
+                        </div>
+                        <div class="star">
+                            <button type="submit" name="submit" value="s_2" class=><i class="fa fa-star fa-4x"></i>
+                            </button>
+                        </div>
+                        <div class="star">
+                            <button type="submit" name="submit" value="s_1" class=><i class="fa fa-star fa-4x"></i>
+                            </button>
+                        </div>
+                    </form>
+                <div class="average">{{ average }}</div>
+                </div>
+            {% endif %}
             <div class="description">
                 <div class="center_content">
                     {{ post.text| linebreaks }}
@@ -33,28 +61,6 @@
                 </div>
             {% endfor %}
 
-            {% if user.is_authenticated %}
-            <div class="stars">
-                <form class="star_form" method="POST" action="{% url 'title' post.genre.first.slug post.slug %}">
-                    {% csrf_token %}
-                    <div class="star">
-                        <button type="submit" name="submit" value="s_1" class=><i class="fa fa-star fa-4x"></i></button>
-                    </div>
-                    <div class="star">
-                        <button type="submit" name="submit" value="s_2" class=><i class="fa fa-star fa-4x"></i></button>
-                    </div>
-                    <div class="star">
-                        <button type="submit" name="submit" value="s_3" class=><i class="fa fa-star fa-4x"></i></button>
-                    </div>
-                    <div class="star">
-                        <button type="submit" name="submit" value="s_4" class=><i class="fa fa-star fa-4x"></i></button>
-                    </div>
-                    <div class="star">
-                        <button type="submit" name="submit" value="s_5" class=><i class="fa fa-star fa-4x"></i></button>
-                    </div>
-                </form>
-            </div>
-            {% endif %}
         </div>
     </main>
 {% endblock content %}
